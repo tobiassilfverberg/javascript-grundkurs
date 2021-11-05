@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Guess-the-number-with-dom</title>
 
     <link
@@ -12,21 +12,33 @@
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
       crossorigin="anonymous"
     />
-</head>
-<body>
+  </head>
+  <body>
     <h1 class="m-2">Guess-the-number-with-dom</h1>
 
     <h3 class="m-2">Gissa på ett tal mellan 0-10</h3>
 
     <form id="guessTheNumber" class="m-2">
-        <input type="number" id="userGuess" name="userGuess" placeholder="Skriv din gissning här" class="form-control">
-        <button type="submit" id="submitButton" class="btn btn-success mt-2">Gissa</button>
+      <input
+        type="number"
+        min="0"
+        max="10"
+        id="userGuess"
+        name="userGuess"
+        placeholder="Skriv din gissning här"
+        class="form-control"
+      />
+      <button type="submit" id="submitButton" class="btn btn-success mt-2">
+        Gissa
+      </button>
     </form>
 
     <h4 id="guessFeedback" class="m-2"></h4>
 
-    <button id="startNewGame" class="btn btn-warning m-2">Starta nytt spel</button>
+    <button id="startNewGame" class="btn btn-warning m-2">
+      Starta nytt spel
+    </button>
 
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
