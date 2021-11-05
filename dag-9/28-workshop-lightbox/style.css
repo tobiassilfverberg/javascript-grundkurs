@@ -43,6 +43,7 @@ a.photo {
   align-items: center;
   padding: 2rem 3rem;
 }
+
 #lightbox-wrapper.show {
   display: flex;
 }
