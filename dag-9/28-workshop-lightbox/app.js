@@ -36,11 +36,15 @@ imagesPhotoEl.forEach((image) =>
     // steg 3
     lightboxWrapperEl.classList.add("show");
     // steg 5
-    imgCaption.innerHTML = photoParent;
+    imgCaption.innerHTML = e.target.parentElement.getAttribute("title");
   })
 );
 
 // steg 4
-lightboxWrapperEl.addEventListener("click", () => {
+lightboxWrapperEl.addEventListener("click", (e) => {
+  if (e.target.tagName === "IMG") return;
   lightboxWrapperEl.classList.remove("show");
+
+  //empty lightbox src
+  imagesPhotoImageEl.setAttribute("src", "");
 });
