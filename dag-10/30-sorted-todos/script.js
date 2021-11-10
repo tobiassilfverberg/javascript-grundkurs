@@ -21,11 +21,12 @@ const todosEl = document.querySelector("#todos");
 const completedTodosEl = document.querySelector("#completed-todos");
 
 // list of todos
+let maxId = 0;
 const todos = [
   {
     id: 1,
     title: "Eat",
-    completed: false,
+    completed: true,
   },
   {
     id: 2,
@@ -35,34 +36,40 @@ const todos = [
   {
     id: 3,
     title: "Code",
-    completed: false,
+    completed: true,
   },
   {
     id: 4,
     title: "Drink Coffee",
     completed: false,
   },
+  {
+    id: 5,
+    title: "Learn Javascript",
+    completed: false,
+  },
 ];
+
+todos.sort((a, b) => a.title.toUpperCase() > b.title.toUpperCase());
 
 const renderTodos = () => {
   // empty UL of todos
   todosEl.innerHTML = "";
   completedTodosEl.innerHTML = "";
 
+  const incompletedTodos = todos.filter(todo => !todo.completed);
+
+  const completedTodos = todos.filter(todo => todo.completed);
+
   // render todos to DOM
-  todos.sort((a, b) => a.title.toUpperCase() > b.title.toUpperCase());
-  console.log(todos);
-  todos.forEach((todo, i) => {
-    console.log(`Todo at index ${i} is: ${todo.title}`);
-    if (todo.completed === true) {
-      completedTodosEl.innerHTML += `<li class="list-group-item completed d-flex justify-content-between" id="${todo.id}" data-index="${i}">
-             ${todo.title}<button class="ms-2">🗑</button></li>`;
-    } else {
-      todosEl.innerHTML += `<li class="list-group-item d-flex justify-content-between" id="${todo.id}" data-index="${i}">
-             ${todo.title}<button class="ms-2">🗑</button></li>`;
-    }
+  incompletedTodos.forEach((todo) => {
+    todosEl.innerHTML += `<li class="list-group-item d-flex justify-content-between" data-id="${todo.id}">${todo.title}<button class="ms-2">🗑</button></li>`;
   });
-};
+
+  completedTodos.forEach((todo) => {
+    completedTodosEl.innerHTML += `<li class="list-group-item d-flex justify-content-between" data-id="${todo.id}">${todo.title}<button class="ms-2">🗑</button></li>`;
+  });
+}; 
 
 renderTodos();
 
@@ -70,17 +77,31 @@ newTodoFormEl.addEventListener("submit", (e) => {
   // stop form from being submitted to web server and hence causinga page reload
   e.preventDefault();
 
-  let newTodo = [...todos].sort((a, b) => b.id - a.id);
-
-  // get todo to add new object to array
-  todos.push({
-    id: newTodo[0].id + 1,
-    title: e.target.newTodo.value,
-    completed: false,
-  });
+ // get todo to add to list of todos
+ const newTodoDescription = e.target.newTodo.value;
 
   // empty input
   e.target.newTodo.value = "";
+
+  // find max id of todos
+  let maxId = 0;
+  todos.forEach(todo => {
+    if (todo.id > maxId) {
+      maxId = todo.id;
+    }
+  }); 
+  
+  // increase maxId 
+  const newTodoId = maxId + 1;
+
+  // create an object for the new todo
+  const newTodo = {
+    id: newTodoId,
+    title: newTodoDescription,
+    completed: false,
+  };
+
+  todos.push(newTodo);
 
   //render todos
   renderTodos();
@@ -92,72 +113,33 @@ newTodoFormEl.addEventListener("reset", () => {
   alert("gOOD job cleaning");
 });
 
-todosEl.addEventListener("click", (e) => {
-  // check if user clicked on a LI element
+// get all todo-lists and attach a click-handler to each list
+document.querySelectorAll('.todos').forEach(listEl => {
+  listEl.addEventListener('click', e => {
+     // check if user clicked on a LI element
   if (e.target.tagName === "LI") {
-    // deklarera variabeln index för att veta vilken li som blev klickad
-    const index = e.target.dataset.index;
-    // kolla om property "completed" är false
-    if (todos[index].completed === false) {
-      // om "completed" är false, ändra "completed" till true, klassen "completed" läggs på den klickade li:n
-      todos[index].completed = true;
-      // rendera ut ny todo-lista med klassen "completed" på den li som blev klickad
-      renderTodos();
-    } // kolla annars om property "completed" är true
-    else if (todos[index].completed === true) {
-      // isåfall, sätt "completed" till false, klassen "completed" tas bort från klickade li:n
-      todos[index].completed = false;
-      // rendera ut ny todo-lista utan klassen "completed"
-      renderTodos();
-    }
-  } else if (e.target.tagName === "BUTTON") {
-    //remove list item from list and array
-    const buttonEl = e.target;
-    const liEl = buttonEl.parentElement;
-    const index = liEl.dataset.index; //data-index =""
+    // find id of clicked todo
+    const todo_id = e.target.dataset.id;
+    
+    // find todo with id todo_id in list of todos
+    const found_todo = todos.find(todo => todo.id == todo_id);
 
-    // shorter version of above 3 lines
-    // const index = e.target.parentElement.dataset.index;
+    // change completed status of found todo
+    found_todo.completed = !found_todo.completed;
+
+    renderTodos();
+    } else if (e.target.tagName === "BUTTON") {
+      // find id of clicked toto
+      const todo_id = e.target.parentElement.dataset.id;
+
+      // find array-index of todo with id "todo-id"
+      const found_todo_index = todos.findIndex(todo => todo.id == todo_id);
 
     //remove item with index from array
-    todos.splice(index, 1);
+    todos.splice(found_todo_index, 1);
 
     // render todos
     renderTodos();
   }
-});
-
-completedTodosEl.addEventListener("click", (e) => {
-  if (e.target.tagName === "LI") {
-    // deklarera variabeln index för att veta vilken li som blev klickad
-    const index = e.target.dataset.index;
-    console.log(index);
-    // kolla om property "completed" är false
-    if (todos[index].completed === false) {
-      // om "completed" är false, ändra "completed" till true, klassen "completed" läggs på den klickade li:n
-      todos[index].completed = true;
-      // rendera ut ny todo-lista med klassen "completed" på den li som blev klickad
-      renderTodos();
-    } // kolla annars om property "completed" är true
-    else if (todos[index].completed === true) {
-      // isåfall, sätt "completed" till false, klassen "completed" tas bort från klickade li:n
-      todos[index].completed = false;
-      // rendera ut ny todo-lista utan klassen "completed"
-      renderTodos();
-    }
-  } else if (e.target.tagName === "BUTTON") {
-    //remove list item from list and array
-    const buttonEl = e.target;
-    const liEl = buttonEl.parentElement;
-    const index = liEl.dataset.index; //data-index =""
-
-    // shorter version of above 3 lines
-    // const index = e.target.parentElement.dataset.index;
-
-    //remove item with index from array
-    todos.splice(index, 1);
-
-    // render todos
-    renderTodos();
-  }
+  });
 });
