@@ -57,9 +57,9 @@ const renderTodos = () => {
   todosEl.innerHTML = "";
   completedTodosEl.innerHTML = "";
 
-  const incompletedTodos = todos.filter(todo => !todo.completed);
+  const incompletedTodos = todos.filter((todo) => !todo.completed);
 
-  const completedTodos = todos.filter(todo => todo.completed);
+  const completedTodos = todos.filter((todo) => todo.completed);
 
   // render todos to DOM
   incompletedTodos.forEach((todo) => {
@@ -69,7 +69,7 @@ const renderTodos = () => {
   completedTodos.forEach((todo) => {
     completedTodosEl.innerHTML += `<li class="list-group-item d-flex justify-content-between" data-id="${todo.id}">${todo.title}<button class="ms-2">🗑</button></li>`;
   });
-}; 
+};
 
 renderTodos();
 
@@ -77,21 +77,24 @@ newTodoFormEl.addEventListener("submit", (e) => {
   // stop form from being submitted to web server and hence causinga page reload
   e.preventDefault();
 
- // get todo to add to list of todos
- const newTodoDescription = e.target.newTodo.value;
+  // get todo to add to list of todos
+  const newTodoDescription = e.target.newTodo.value;
 
   // empty input
   e.target.newTodo.value = "";
 
+  /* 
   // find max id of todos
   let maxId = 0;
-  todos.forEach(todo => {
+  todos.forEach((todo) => {
     if (todo.id > maxId) {
       maxId = todo.id;
     }
-  }); 
-  
-  // increase maxId 
+  });
+ */
+  const maxId = todos.reduce((max, todo) => (todo.id > max ? todo.id : max), 0);
+
+  // increase maxId
   const newTodoId = maxId + 1;
 
   // create an object for the new todo
@@ -114,32 +117,32 @@ newTodoFormEl.addEventListener("reset", () => {
 });
 
 // get all todo-lists and attach a click-handler to each list
-document.querySelectorAll('.todos').forEach(listEl => {
-  listEl.addEventListener('click', e => {
-     // check if user clicked on a LI element
-  if (e.target.tagName === "LI") {
-    // find id of clicked todo
-    const todo_id = e.target.dataset.id;
-    
-    // find todo with id todo_id in list of todos
-    const found_todo = todos.find(todo => todo.id == todo_id);
+document.querySelectorAll(".todos").forEach((listEl) => {
+  listEl.addEventListener("click", (e) => {
+    // check if user clicked on a LI element
+    if (e.target.tagName === "LI") {
+      // find id of clicked todo
+      const todo_id = e.target.dataset.id;
 
-    // change completed status of found todo
-    found_todo.completed = !found_todo.completed;
+      // find todo with id todo_id in list of todos
+      const found_todo = todos.find((todo) => todo.id == todo_id);
 
-    renderTodos();
+      // change completed status of found todo
+      found_todo.completed = !found_todo.completed;
+
+      renderTodos();
     } else if (e.target.tagName === "BUTTON") {
       // find id of clicked toto
       const todo_id = e.target.parentElement.dataset.id;
 
       // find array-index of todo with id "todo-id"
-      const found_todo_index = todos.findIndex(todo => todo.id == todo_id);
+      const found_todo_index = todos.findIndex((todo) => todo.id == todo_id);
 
-    //remove item with index from array
-    todos.splice(found_todo_index, 1);
+      //remove item with index from array
+      todos.splice(found_todo_index, 1);
 
-    // render todos
-    renderTodos();
-  }
+      // render todos
+      renderTodos();
+    }
   });
 });
