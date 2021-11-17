@@ -3,7 +3,7 @@
  * 
  */
 
-const getUsers = () => {
+const getJSON = (url, callback) => {
     // insert code here
     
     // Create a new XML Http Reqest
@@ -22,21 +22,21 @@ const getUsers = () => {
 
                 // Take a string and PARSE it into a JavaScript Object (array)
                 const data = JSON.parse(request.responseText);
-                console.log("Data:", data);
+                // console.log("Data:", data);
 
-                data.forEach(user => {
-                    document.querySelector('#users').innerHTML += `<li>${user.name}</li>`;
-                })
+                callback(false, data);
 
             } else {
                 // Something went wrong with the request
                 console.log("Request was *NOT* OK!");
+
+                callback("Something went wrong");
             }
         }
-});
+    });
 
-// Set request to GET data from 'https://jsonplaceholder.typicode.com/users'
-request.open('GET', 'https://jsonplaceholder.typicode.com/users');
+// Set request to GET data from url
+request.open('GET', url);
 
 // Send request
 request.send();
@@ -45,4 +45,26 @@ request.send();
 console.log("Request sent!");
 }
 
-getUsers();
+// Get users
+getJSON('https://jsonplaceholder.typicode.com/users', (err, data) => {
+    if (err) {
+        console.log("Error!")
+        return;
+    }
+    // console.log("Got data?", data)
+
+    data.forEach(user => {
+        document.querySelector('#users').innerHTML += `<li>${user.name}</li>`;
+    })
+});
+
+getJSON('https://jsonplaceholder.typicode.com/posts', (err, data) => {
+    if (err) {
+        console.log("Could not get posts. Error:", err);
+        return;
+    }
+    
+    data.forEach(post => {
+        document.querySelector('#posts').innerHTML += `<li>${post.title}</li>`;
+    })
+})
