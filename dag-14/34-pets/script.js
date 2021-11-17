@@ -1,11 +1,9 @@
 /**
- * XMLHttpRequest
+ * Async pets
  * 
  */
 
 const getJSON = (url, callback) => {
-    // insert code here
-    
     // Create a new XML Http Reqest
     const request = new XMLHttpRequest();
 
@@ -34,7 +32,6 @@ const getJSON = (url, callback) => {
             }
         }
     });
-
 // Set request to GET data from url
 request.open('GET', url);
 
@@ -45,26 +42,11 @@ request.send();
 console.log("Request sent!");
 }
 
-// Get users
-getJSON('https://jsonplaceholder.typicode.com/users', (err, data) => {
+// Get list of pet species
+getJSON('data/pets.json', (err, data) => {
     if (err) {
-        console.log("Error!")
-        return;
+        console.log("Could not get list of pet species. Error was:", err);
     }
-    // console.log("Got data?", data)
 
-    data.forEach(user => {
-        document.querySelector('#users').innerHTML += `<li>${user.name}</li>`;
-    })
+    console.log("Got list of pet species:", data);
 });
-
-getJSON('https://jsonplaceholder.typicode.com/posts', (err, data) => {
-    if (err) {
-        console.log("Could not get posts. Error:", err);
-        return;
-    }
-
-    data.forEach(post => {
-        document.querySelector('#posts').innerHTML += `<li>${post.title}</li>`;
-    })
-})
