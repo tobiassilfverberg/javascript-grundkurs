@@ -3,33 +3,36 @@
  * 
  */
 
-// Create a new XML Http Reqest
-const request = new XMLHttpRequest();
+const getUsers = () => {
+    // insert code here
+    
+    // Create a new XML Http Reqest
+    const request = new XMLHttpRequest();
 
-// Attach an event listener to the request
-request.addEventListener('readystatechange', () => {
-    // Check if readystate is 4 (=== DONE)
-    if (request.readyState === 4) {
+    // Attach an event listener to the request
+    request.addEventListener('readystatechange', () => {
+        // Check if readystate is 4 (=== DONE)
+        if (request.readyState === 4) {
 
-        // Was request successful (200 = OK)?
-        if (request.status === 200) {
-            // Request returned successful!
-            console.log("Request was *OK*!");
-            // console.log("Response:", request.responseText, typeof request.responseText);
+            // Was request successful (200 = OK)?
+            if (request.status === 200) {
+                // Request returned successful!
+                console.log("Request was *OK*!");
+                // console.log("Response:", request.responseText, typeof request.responseText);
 
-            // Take a string and PARSE it into a JavaScript Object (array)
-            const data = JSON.parse(request.responseText);
-            console.log("Data:", data);
+                // Take a string and PARSE it into a JavaScript Object (array)
+                const data = JSON.parse(request.responseText);
+                console.log("Data:", data);
 
-            data.forEach(user => {
-                document.querySelector('#users').innerHTML += `<li>${user.name}</li>`;
-            })
+                data.forEach(user => {
+                    document.querySelector('#users').innerHTML += `<li>${user.name}</li>`;
+                })
 
-        } else {
-            // Something went wrong with the request
-            console.log("Request was *NOT* OK!");
+            } else {
+                // Something went wrong with the request
+                console.log("Request was *NOT* OK!");
+            }
         }
-    }
 });
 
 // Set request to GET data from 'https://jsonplaceholder.typicode.com/users'
@@ -40,3 +43,6 @@ request.send();
 
 // Done?
 console.log("Request sent!");
+}
+
+getUsers();
