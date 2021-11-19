@@ -55,6 +55,6 @@ getJSON("data/cats.json")
     console.log("List of birds:", data);
   })
   .catch((err) => {
-    console.log("No cats...");
+    console.log("No pets...");
     console.log("Request rejected:", err);
   });
