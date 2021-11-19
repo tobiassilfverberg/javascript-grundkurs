@@ -12,19 +12,22 @@ const willWeGetTheAnswersToTheExam = () => {
     setTimeout(() => {
       if (teacherIsNice) {
         // resolve promise
-        resolve();
+        const answers = [3, 1, 4, 2];
+        resolve(answers);
       } else {
         // reject promise
-        reject();
+        reject("Aint nobody got time for that");
       }
     }, 5000);
   });
 };
 
 willWeGetTheAnswersToTheExam()
-  .then(() => {
-    alert("Promise has been fulfilled. YAY!");
+  .then((data) => {
+    console.log("Promise has been fulfilled. YAY!");
+    console.log("Here's the answers:", data);
   })
-  .catch(() => {
-    alert("You always make promises but never hold them.");
+  .catch((err) => {
+    console.log("You always make promises but never hold them.");
+    console.log("Promise rejected, error:", err);
   });
