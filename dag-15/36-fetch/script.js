@@ -14,7 +14,7 @@ fetch("data/ogs.json")
   });
  */
 
-fetch("data/horses.json")
+fetch("https://api.chucknorris.io/jokes/random")
   .then((res) => {
     // Trigger an error
     if (!res.ok) {
@@ -24,7 +24,7 @@ fetch("data/horses.json")
     return res.json();
   })
   .then((data) => {
-    console.log("got data!:", data);
+    document.querySelector("p").innerHTML += `${data.value}`;
   })
   .catch((err) => {
     console.log("Dogs rejected:", err);
