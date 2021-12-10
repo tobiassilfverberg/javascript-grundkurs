@@ -57,15 +57,11 @@ class Todo {
     }
 
     setCompleted() {
-        if (this.completed === false) {
-            return this.completed = true;
-        }
+        this.completed = true;
     }
 
     setIncomplete() {
-        if (this.completed === true) {
-            return this.completed = false;
-        }
+        this.completed = false;
     }
 }
 
