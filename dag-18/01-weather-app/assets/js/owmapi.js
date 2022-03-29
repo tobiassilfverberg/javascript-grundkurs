@@ -2,7 +2,7 @@
  * Open Weather Map API
  */
 
-const API_KEY = "0ade3d8302cf07178fe9ac867843cd14"
+// const API_KEY = 
 const BASE_URL = "https://api.openweathermap.org/data/2.5"
 
 const getCurrentWeather = async (query) => {
