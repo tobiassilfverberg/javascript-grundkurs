@@ -13,6 +13,8 @@ const app = Vue.createApp({
 
 			msg: "Hello, Vue!",
 
+			username: "Anonymous",
+
 			showBox: true,
 
 			x: 0,

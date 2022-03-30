@@ -29,6 +29,20 @@
 
 			<hr />
 
+			<div class="mb-3">
+				<input
+					type="text"
+					class="form-control"
+					placeholder="Enter your name"
+					@change="setName"
+					v-model="username"
+				/>
+			</div>
+
+			<p>Hello, {{ username }}</p>
+
+			<hr />
+
 			<p>
 				Salary per hour:
 				<span :class="getSalaryClass()">{{ salary }} &euro;</span>
