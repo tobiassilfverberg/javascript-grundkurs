@@ -65,8 +65,8 @@
 
 			<hr />
 
-			<div class="grey-box">
-				<div class="coords">0, 0</div>
+			<div class="grey-box" @mousemove="updateCoords">
+				<div class="coords">{{ x }}, {{ y }}</div>
 			</div>
 		</div>
 

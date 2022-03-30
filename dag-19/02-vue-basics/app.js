@@ -8,8 +8,13 @@ const app = Vue.createApp({
 	data() {
 		return {
 			count: 0,
+
 			salary: 10,
+
 			msg: "Hello, Vue!",
+
+			x: 0,
+			y: 0,
 		}
 	},
 	methods: {
@@ -22,6 +27,11 @@ const app = Vue.createApp({
 				return
 			}
 			this.salary -= amount
+		},
+		updateCoords(e) {
+			console.log("Move event", e)
+			this.x = e.offsetX
+			this.y = e.offsetY
 		},
 	},
 })
