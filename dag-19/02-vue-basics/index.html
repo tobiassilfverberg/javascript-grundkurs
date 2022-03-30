@@ -29,7 +29,10 @@
 
 			<hr />
 
-			<p>Salary per hour: {{ salary }} &euro;</p>
+			<p>
+				Salary per hour:
+				<span :class="getSalaryClass()">{{ salary }} &euro;</span>
+			</p>
 
 			<div class="buttons">
 				<div class="mb-1">
@@ -65,9 +68,15 @@
 
 			<hr />
 
-			<div class="grey-box" @mousemove="updateCoords">
+			<button class="mb-3 btn btn-primary btn-lg" @click="toggleBox">
+				Such button
+			</button>
+
+			<div class="grey-box" v-show="showBox" @mousemove="updateCoords">
 				<div class="coords">{{ x }}, {{ y }}</div>
 			</div>
+
+			<p v-show="!showBox">No box for you</p>
 		</div>
 
 		<!-- Vue 3 -->

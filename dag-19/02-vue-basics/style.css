@@ -1,11 +1,12 @@
 /**
  * Generic styles
  */
-
-body {
-}
-
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
 	margin-bottom: 0.75em;
 }
 
@@ -28,6 +29,14 @@ hr {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+}
+
+.bad-salary {
+	color: red;
+}
+
+.good-salary {
+	color: limegreen;
 }
 
 .grey-box {

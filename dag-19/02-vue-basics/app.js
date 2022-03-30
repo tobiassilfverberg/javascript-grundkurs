@@ -13,14 +13,21 @@ const app = Vue.createApp({
 
 			msg: "Hello, Vue!",
 
+			showBox: true,
+
 			x: 0,
 			y: 0,
 		}
 	},
 	methods: {
+		getSalaryClass() {
+			return this.salary >= 20 ? "good-salary" : "bad-salary"
+		},
+
 		increaseSalary(amount = 1) {
 			this.salary += amount
 		},
+
 		decreaseSalary(amount = 1) {
 			if (this.salary - amount < 5) {
 				this.salary = 5
@@ -28,8 +35,12 @@ const app = Vue.createApp({
 			}
 			this.salary -= amount
 		},
+
+		toggleBox() {
+			this.showBox = !this.showBox
+		},
+
 		updateCoords(e) {
-			console.log("Move event", e)
 			this.x = e.offsetX
 			this.y = e.offsetY
 		},
