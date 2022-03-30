@@ -39,6 +39,10 @@ hr {
 	color: limegreen;
 }
 
+.completed {
+	color: lime;
+}
+
 .grey-box {
 	background-color: var(--bs-light);
 	color: var(--bs-body-color);

@@ -43,6 +43,19 @@
 
 			<hr />
 
+			<h2>Todos</h2>
+
+			<ul>
+				<li
+					v-for="todo in todos"
+					:class="todo.completed ? 'completed' : ''"
+				>
+					{{ todo.title }}
+				</li>
+			</ul>
+
+			<hr />
+
 			<p>
 				Salary per hour:
 				<span :class="getSalaryClass()">{{ salary }} &euro;</span>
