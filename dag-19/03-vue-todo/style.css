@@ -29,8 +29,14 @@ ul {
 	list-style-type: none;
 }
 
-.completed {
-	color: lime;
+.todolist .finished .todo-title {
+	color: limegreen;
+	text-decoration: line-through;
+}
+
+.todolist .todo-delete {
+	margin-left: 0.5em;
+	cursor: pointer;
 }
 
 .notCompleted {
