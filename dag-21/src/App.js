@@ -13,6 +13,11 @@ const App = () => {
 	const [salary, setSalary] = useState(10)
 
 	const changeSalary = (amount) => {
+		if (salary + amount < 10) {
+			setSalary(10)
+			return
+		}
+
 		setSalary(salary + amount)
 	}
 
