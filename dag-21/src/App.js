@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css"
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	let msg = "hi mom"
+
+	const handleButtonClick = () => {
+		console.log("You clicked the button, good job")
+	}
+
+	return (
+		<div className="App">
+			<h1>React Basics</h1>
+
+			<h3>{msg}</h3>
+
+			<p>You have clicked the button 0 times</p>
+
+			<button
+				onClick={handleButtonClick}
+				className="btn btn-success btn-md"
+			>
+				Click me
+			</button>
+		</div>
+	)
 }
 
-export default App;
+export default App
