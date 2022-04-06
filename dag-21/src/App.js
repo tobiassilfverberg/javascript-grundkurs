@@ -11,6 +11,8 @@ const App = () => {
 		{ title: "Got State?", likes: 3 },
 	])
 
+	const [newPostTitle, setNewPostTitle] = useState("")
+
 	const [showPosts, setShowPosts] = useState(true)
 
 	const addLike = (post) => {
@@ -27,8 +29,19 @@ const App = () => {
 		setClicks((prevClicks) => prevClicks + 1)
 	}
 
+	const handleFormSubmit = (e) => {
+		// stop form from submitting
+		e.preventDefault()
+
+		// push a new post to the posts state
+		setPosts([...posts, { title: newPostTitle, likes: 0 }])
+
+		// clear newPostTitle state
+		setNewPostTitle("")
+	}
+
 	return (
-		<div className="App">
+		<div className="App container">
 			<h1>React Basics</h1>
 
 			<h2>{msg}</h2>
@@ -58,6 +71,21 @@ const App = () => {
 			<hr />
 
 			<h2>Posts</h2>
+
+			<form onSubmit={handleFormSubmit}>
+				<div className="input-group mb-2">
+					<input
+						type="text"
+						class="form-control"
+						placeholder="Post title"
+						onChange={(e) => setNewPostTitle(e.target.value)}
+						value={newPostTitle}
+					/>
+					<button type="submit" className="btn btn-primary">
+						Create post 😃
+					</button>
+				</div>
+			</form>
 
 			<button
 				className="btn btn-primary"
