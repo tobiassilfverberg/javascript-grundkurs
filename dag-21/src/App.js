@@ -13,6 +13,8 @@ const App = () => {
 	const [salary, setSalary] = useState(10)
 	const [showSalary, setShowSalary] = useState(true)
 
+	const [showPosts, setShowPosts] = useState(true)
+
 	const addLike = (post) => {
 		post.likes++
 
@@ -66,7 +68,7 @@ const App = () => {
 				className="btn btn-primary"
 				onClick={() => setShowSalary(!showSalary)}
 			>
-				Show
+				{showSalary ? "Hide salary" : "Show salary"}
 			</button>
 
 			{showSalary && (
@@ -126,25 +128,34 @@ const App = () => {
 
 			<h2>Posts</h2>
 
-			<ul>
-				{posts.map((post, index) => (
-					<li key={index}>
-						{post.title} ({post.likes})
-						<button
-							className="btn btn-success btn-sm m-1"
-							onClick={() => addLike(post)}
-						>
-							👍
-						</button>
-						<button
-							className="btn btn-danger btn-sm"
-							onClick={() => deletePost(post)}
-						>
-							🚮
-						</button>
-					</li>
-				))}
-			</ul>
+			<button
+				className="btn btn-primary"
+				onClick={() => setShowPosts(!showPosts)}
+			>
+				{showPosts ? "Hide posts" : "Show posts"}
+			</button>
+
+			{showPosts && (
+				<ul>
+					{posts.map((post, index) => (
+						<li key={index}>
+							{post.title} ({post.likes})
+							<button
+								className="btn btn-success btn-sm m-1"
+								onClick={() => addLike(post)}
+							>
+								👍
+							</button>
+							<button
+								className="btn btn-danger btn-sm"
+								onClick={() => deletePost(post)}
+							>
+								🚮
+							</button>
+						</li>
+					))}
+				</ul>
+			)}
 		</div>
 	)
 }
