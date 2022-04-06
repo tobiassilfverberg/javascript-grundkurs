@@ -22,7 +22,7 @@ const App = () => {
 	}
 
 	const handleButtonClick = () => {
-		setClicks(clicks + 1)
+		setClicks((prevClicks) => prevClicks + 1)
 	}
 
 	return (
