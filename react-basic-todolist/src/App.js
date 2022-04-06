@@ -119,7 +119,7 @@ function App() {
 							</li>
 						))}
 					</ul>
-					<p className="text-small muted">
+					<p className="text-small text-muted">
 						You have {unfinishedTodosCount()} unfinished todos left
 					</p>
 				</>
