@@ -12,6 +12,16 @@ const App = () => {
 
 	const [salary, setSalary] = useState(10)
 
+	const addLike = (post) => {
+		post.likes++
+
+		setPosts([...posts])
+	}
+
+	const deletePost = (clickedPost) => {
+		setPosts(posts.filter((post) => post !== clickedPost))
+	}
+
 	const changeSalary = (amount) => {
 		if (salary + amount < 10) {
 			setSalary(10)
@@ -102,6 +112,18 @@ const App = () => {
 				{posts.map((post, index) => (
 					<li key={index}>
 						{post.title} ({post.likes})
+						<button
+							className="btn btn-success btn-sm m-1"
+							onClick={() => addLike(post)}
+						>
+							👍
+						</button>
+						<button
+							className="btn btn-danger btn-sm"
+							onClick={() => deletePost(post)}
+						>
+							🚮
+						</button>
 					</li>
 				))}
 			</ul>
