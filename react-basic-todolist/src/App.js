@@ -9,6 +9,9 @@ const App = () => {
 		{ title: "Drink ALL THE coffee", completed: false },
 	])
 
+	const [unfinishedTodos, setUnfinishedTodos] = useState([])
+	const [finishedTodos, setFinishedTodos] = useState([])
+
 	// input state
 	const [newTodoTitle, setNewTodoTitle] = useState("")
 
@@ -33,8 +36,10 @@ const App = () => {
 		setNewTodoTitle("")
 	}
 
-	const unfinishedTodos = todos.filter((todo) => !todo.completed)
-	const finishedTodos = todos.filter((todo) => todo.completed)
+	useEffect(() => {
+		setUnfinishedTodos(todos.filter((todo) => !todo.completed))
+		setFinishedTodos(todos.filter((todo) => todo.completed))
+	}, [todos])
 
 	// Our first side-effect
 	useEffect(() => {
