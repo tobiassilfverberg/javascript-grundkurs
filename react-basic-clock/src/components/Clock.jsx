@@ -6,10 +6,14 @@ const Clock = () => {
 	})
 
 	useEffect(() => {
-		setInterval(() => {
+		const intervalId = setInterval(() => {
 			const now = new Date().toLocaleTimeString()
 			setTime(now)
 		}, 1000)
+
+		return () => {
+			clearInterval(intervalId)
+		}
 	}, [])
 
 	return <div className="display-1 text-center">{time}</div>
