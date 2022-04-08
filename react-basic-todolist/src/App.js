@@ -1,18 +1,19 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import "./App.css"
 
-function App() {
+const App = () => {
 	const [todos, setTodos] = useState([
-		{ title: "Drink Coffee", completed: false },
-		{ title: "Drink RedBull", completed: false },
-		{ title: "Learn React", completed: true },
+		{ title: "Make coffee", completed: true },
+		{ title: "Drink coffee", completed: false },
+		{ title: "Drink MOAR coffee", completed: false },
+		{ title: "Drink ALL THE coffee", completed: false },
 	])
 
+	// input state
 	const [newTodoTitle, setNewTodoTitle] = useState("")
 
-	const changeStatus = (clickedTodo) => {
-		clickedTodo.completed = !clickedTodo.completed
-
+	const toggleTodo = (todo) => {
+		todo.completed = !todo.completed
 		setTodos([...todos])
 	}
 
@@ -25,98 +26,102 @@ function App() {
 		e.preventDefault()
 
 		// push a new todo to the todos state
-		setTodos([...todos, { title: newTodoTitle, completed: false }])
+		const newTodo = { title: newTodoTitle, completed: false }
+		setTodos([...todos, newTodo])
 
 		// clear newTodoTitle state
 		setNewTodoTitle("")
 	}
 
-	const unfinishedTodosCount = () => {
-		return todos.reduce((previousValue, todo) => {
-			if (todo.completed) {
-				return previousValue
-			}
+	const unfinishedTodos = todos.filter((todo) => !todo.completed)
+	const finishedTodos = todos.filter((todo) => todo.completed)
 
-			return previousValue + 1
-		}, 0)
-	}
+	// Our first side-effect
+	useEffect(() => {
+		// This will be executed after each render
+		console.log("Hi, im a side-effect")
+		document.title = `${finishedTodos.length}/${todos.length} completed`
+	}, [finishedTodos, todos])
 
 	return (
 		<div className="App container">
-			<h1>Todos</h1>
+			<h1>React Simple Todos</h1>
 
-			<form onSubmit={handleFormSubmit}>
-				<div className="input-group mb-2">
-					<input
-						type="text"
-						className="form-control"
-						placeholder="Post todo title"
-						onChange={(e) => setNewTodoTitle(e.target.value)}
-						value={newTodoTitle}
-					/>
-					<button type="submit" className="btn btn-primary">
-						Create todo 😃
-					</button>
-				</div>
-			</form>
+			<div className="mb-3">
+				<form onSubmit={handleFormSubmit}>
+					<div className="input-group">
+						<input
+							type="text"
+							className="form-control"
+							placeholder="Todo title"
+							onChange={(e) => setNewTodoTitle(e.target.value)}
+							value={newTodoTitle}
+						/>
+						<button type="submit" className="btn btn-primary">
+							Create
+						</button>
+					</div>
+				</form>
+			</div>
 
 			{todos.length > 0 && (
 				<>
-					<h2>Unfinished todos</h2>
-
-					<ul>
-						{todos
-							.filter((todo) => !todo.completed)
-							.map((todo, index) => (
-								<li key={index}>
+					{unfinishedTodos.length > 0 && (
+						<ul className="todolist">
+							{unfinishedTodos.map((todo, index) => (
+								<li
+									className={todo.completed ? "done" : ""}
+									key={index}
+								>
 									<span
-										onClick={() => changeStatus(todo)}
-										className={
-											todo.completed
-												? "text-decoration-line-through text-success"
-												: "text-decoration-none"
-										}
+										className="todo-title"
+										onClick={() => toggleTodo(todo)}
 									>
 										{todo.title}
 									</span>
-									<button
-										className="btn btn-danger btn-sm m-1"
-										onClick={() => deleteTodo(todo)}
-									>
-										🚮
-									</button>
-								</li>
-							))}
-					</ul>
 
-					<h2>Finished todos</h2>
-
-					<ul>
-						{todos
-							.filter((todo) => todo.completed)
-							.map((todo, index) => (
-								<li key={index}>
 									<span
-										onClick={() => changeStatus(todo)}
-										className={
-											todo.completed
-												? "text-decoration-line-through text-success"
-												: "text-decoration-none"
-										}
-									>
-										{todo.title}
-									</span>
-									<button
-										className="btn btn-danger btn-sm m-1"
+										className="todo-delete"
 										onClick={() => deleteTodo(todo)}
 									>
-										🚮
-									</button>
+										🗑
+									</span>
 								</li>
 							))}
-					</ul>
-					<p className="text-small text-muted">
-						You have {unfinishedTodosCount()} unfinished todos left
+						</ul>
+					)}
+
+					{finishedTodos.length > 0 && (
+						<>
+							<h2>Completed todos</h2>
+							<ul className="todolist">
+								{finishedTodos.map((todo, index) => (
+									<li
+										className={todo.completed ? "done" : ""}
+										key={index}
+									>
+										<span
+											className="todo-title"
+											onClick={() => toggleTodo(todo)}
+										>
+											{todo.title}
+										</span>
+
+										<span
+											className="todo-delete"
+											onClick={() => deleteTodo(todo)}
+										>
+											🗑
+										</span>
+									</li>
+								))}
+							</ul>
+						</>
+					)}
+
+					<p className="status">
+						{finishedTodos.length} av {todos.length} todos
+						avklarade.
 					</p>
 				</>
 			)}
