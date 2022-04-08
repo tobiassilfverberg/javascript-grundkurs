@@ -20,14 +20,6 @@ function App() {
 		setTodos(todos.filter((todo) => todo !== clickedTodo))
 	}
 
-	const finishedTodos = () => {
-		return todos.filter((todo) => todo.completed)
-	}
-
-	const unfinishedTodos = () => {
-		return todos.filter((todo) => !todo.completed)
-	}
-
 	const handleFormSubmit = (e) => {
 		// stop form from submitting
 		e.preventDefault()
@@ -73,51 +65,55 @@ function App() {
 					<h2>Unfinished todos</h2>
 
 					<ul>
-						{unfinishedTodos().map((todo, index) => (
-							<li key={index}>
-								<span
-									onClick={() => changeStatus(todo)}
-									className={
-										todo.completed
-											? "text-decoration-line-through text-success"
-											: "text-decoration-none"
-									}
-								>
-									{todo.title}
-								</span>
-								<button
-									className="btn btn-danger btn-sm m-1"
-									onClick={() => deleteTodo(todo)}
-								>
-									🚮
-								</button>
-							</li>
-						))}
+						{todos
+							.filter((todo) => !todo.completed)
+							.map((todo, index) => (
+								<li key={index}>
+									<span
+										onClick={() => changeStatus(todo)}
+										className={
+											todo.completed
+												? "text-decoration-line-through text-success"
+												: "text-decoration-none"
+										}
+									>
+										{todo.title}
+									</span>
+									<button
+										className="btn btn-danger btn-sm m-1"
+										onClick={() => deleteTodo(todo)}
+									>
+										🚮
+									</button>
+								</li>
+							))}
 					</ul>
 
 					<h2>Finished todos</h2>
 
 					<ul>
-						{finishedTodos().map((todo, index) => (
-							<li key={index}>
-								<span
-									onClick={() => changeStatus(todo)}
-									className={
-										todo.completed
-											? "text-decoration-line-through text-success"
-											: "text-decoration-none"
-									}
-								>
-									{todo.title}
-								</span>
-								<button
-									className="btn btn-danger btn-sm m-1"
-									onClick={() => deleteTodo(todo)}
-								>
-									🚮
-								</button>
-							</li>
-						))}
+						{todos
+							.filter((todo) => todo.completed)
+							.map((todo, index) => (
+								<li key={index}>
+									<span
+										onClick={() => changeStatus(todo)}
+										className={
+											todo.completed
+												? "text-decoration-line-through text-success"
+												: "text-decoration-none"
+										}
+									>
+										{todo.title}
+									</span>
+									<button
+										className="btn btn-danger btn-sm m-1"
+										onClick={() => deleteTodo(todo)}
+									>
+										🚮
+									</button>
+								</li>
+							))}
 					</ul>
 					<p className="text-small text-muted">
 						You have {unfinishedTodosCount()} unfinished todos left
