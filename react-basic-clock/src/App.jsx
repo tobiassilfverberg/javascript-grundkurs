@@ -2,7 +2,9 @@ import { useEffect, useState } from "react"
 import "./App.css"
 
 const App = () => {
-	const [time, setTime] = useState("00:13:37")
+	const [time, setTime] = useState(() => {
+		return new Date().toLocaleTimeString()
+	})
 
 	// This will be executed only once
 	useEffect(() => {
