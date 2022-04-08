@@ -43,10 +43,13 @@ const App = () => {
 
 	// Our first side-effect
 	useEffect(() => {
-		// This will be executed after each render
 		console.log("Hi, im a side-effect")
 		document.title = `${finishedTodos.length}/${todos.length} completed`
 	}, [finishedTodos, todos])
+
+	useEffect(() => {
+		console.log("This will be executed ONCE")
+	}, [])
 
 	return (
 		<div className="App container">
