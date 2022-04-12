@@ -78,7 +78,12 @@ const App = () => {
 					{unfinishedTodos.length > 0 && (
 						<ul className="todolist">
 							{unfinishedTodos.map((todo, index) => (
-								<TodoListItem todo={todo} key={index} />
+								<TodoListItem
+									key={index}
+									onTitleClick={toggleTodo}
+									onDelete={deleteTodo}
+									todo={todo}
+								/>
 							))}
 						</ul>
 					)}
@@ -88,9 +93,14 @@ const App = () => {
 							<h2>Completed todos</h2>
 							<ul className="todolist">
 								{finishedTodos.map((todo, index) => (
-									<TodoListItem todo={todo} key={index} />
+									<TodoListItem
+										key={index}
+										onTitleClick={toggleTodo}
+										onDelete={deleteTodo}
+										todo={todo}
+									/>
 								))}
-							</ul> 
+							</ul>
 						</>
 					)}
 
