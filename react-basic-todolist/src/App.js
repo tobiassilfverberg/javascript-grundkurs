@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import "./App.css"
 import AddTodo from "./components/AddTodo"
-import TodoListItem from "./components/TodoListItem"
+import TodoList from "./components/TodoList"
+import AlertInfo from "./components/AlertInfo"
 
 const App = () => {
 	const [todos, setTodos] = useState([
@@ -53,31 +54,34 @@ const App = () => {
 			{todos.length > 0 && (
 				<>
 					{unfinishedTodos.length > 0 && (
-						<ul className="todolist">
-							{unfinishedTodos.map((todo, index) => (
-								<TodoListItem
-									key={index}
-									onTitleClick={toggleTodo}
-									onDelete={deleteTodo}
-									todo={todo}
-								/>
-							))}
-						</ul>
+						<TodoList
+							todos={unfinishedTodos}
+							onToggleTodo={toggleTodo}
+							onDeleteTodo={deleteTodo}
+						/>
+					)}
+					{unfinishedTodos.length === 0 && (
+						<AlertInfo>
+							<h2>Yeeehaaaaw!</h2>
+							<img
+								src="https://c.tenor.com/cBcdBXtqL8UAAAAC/colin-mochrie-whos-awesome.gif"
+								className="img-fluid"
+								alt="You're awesome!"
+							/>
+							<p>
+								You got <strong>nothing</strong> to do.
+							</p>
+						</AlertInfo>
 					)}
 
 					{finishedTodos.length > 0 && (
 						<>
 							<h2>Completed todos</h2>
-							<ul className="todolist">
-								{finishedTodos.map((todo, index) => (
-									<TodoListItem
-										key={index}
-										onTitleClick={toggleTodo}
-										onDelete={deleteTodo}
-										todo={todo}
-									/>
-								))}
-							</ul>
+							<TodoList
+								todos={finishedTodos}
+								onToggleTodo={toggleTodo}
+								onDeleteTodo={deleteTodo}
+							/>
 						</>
 					)}
 
