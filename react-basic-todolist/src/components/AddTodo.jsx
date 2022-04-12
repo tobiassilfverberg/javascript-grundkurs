@@ -27,7 +27,11 @@ const AddTodo = ({ onAddNewTodo }) => {
 					onChange={(e) => setNewTodoTitle(e.target.value)}
 					value={newTodoTitle}
 				/>
-				<button type="submit" className="btn btn-primary">
+				<button
+					type="submit"
+					className="btn btn-primary"
+					disabled={!newTodoTitle.length}
+				>
 					Create
 				</button>
 			</div>
