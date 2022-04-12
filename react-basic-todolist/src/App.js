@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import "./App.css"
+import TodoListItem from "./components/TodoListItem"
 
 const App = () => {
 	const [todos, setTodos] = useState([
@@ -77,24 +78,7 @@ const App = () => {
 					{unfinishedTodos.length > 0 && (
 						<ul className="todolist">
 							{unfinishedTodos.map((todo, index) => (
-								<li
-									className={todo.completed ? "done" : ""}
-									key={index}
-								>
-									<span
-										className="todo-title"
-										onClick={() => toggleTodo(todo)}
-									>
-										{todo.title}
-									</span>
-
-									<span
-										className="todo-delete"
-										onClick={() => deleteTodo(todo)}
-									>
-										🗑
-									</span>
-								</li>
+								<TodoListItem todo={todo} key={index} />
 							))}
 						</ul>
 					)}
@@ -104,26 +88,9 @@ const App = () => {
 							<h2>Completed todos</h2>
 							<ul className="todolist">
 								{finishedTodos.map((todo, index) => (
-									<li
-										className={todo.completed ? "done" : ""}
-										key={index}
-									>
-										<span
-											className="todo-title"
-											onClick={() => toggleTodo(todo)}
-										>
-											{todo.title}
-										</span>
-
-										<span
-											className="todo-delete"
-											onClick={() => deleteTodo(todo)}
-										>
-											🗑
-										</span>
-									</li>
+									<TodoListItem todo={todo} key={index} />
 								))}
-							</ul>
+							</ul> 
 						</>
 					)}
 
