@@ -5,13 +5,7 @@ import TodoList from "./components/TodoList"
 import AlertInfo from "./components/AlertInfo"
 
 const App = () => {
-	const [todos, setTodos] = useState([
-		{ title: "Make coffee", completed: true },
-		{ title: "Drink coffee", completed: false },
-		{ title: "Drink MOAR coffee", completed: false },
-		{ title: "Drink ALL THE coffee", completed: false },
-	])
-
+	const [todos, setTodos] = useState([])
 	const [unfinishedTodos, setUnfinishedTodos] = useState([])
 	const [finishedTodos, setFinishedTodos] = useState([])
 
@@ -28,7 +22,21 @@ const App = () => {
 		setTodos([...todos, newTodo])
 	}
 
+	// useEffect(() => {
+	// 	localStorage.setItem("todos", )
+	// }, [todos])
+
 	useEffect(() => {
+		const storedTodos = JSON.parse(localStorage.getItem("todos"))
+
+		if (storedTodos) {
+			setTodos(storedTodos)
+		}
+	}, [])
+
+	useEffect(() => {
+		localStorage.setItem("todos", JSON.stringify(todos))
+
 		setUnfinishedTodos(todos.filter((todo) => !todo.completed))
 		setFinishedTodos(todos.filter((todo) => todo.completed))
 	}, [todos])
