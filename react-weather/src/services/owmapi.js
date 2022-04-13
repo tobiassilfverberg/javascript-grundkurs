@@ -2,7 +2,7 @@
  * Open Weather Map API
  */
 
-const API_KEY = "4e364db2279ef1ae74eb667a7f5e2f90"
+const API_KEY = "2f807c2bab1112a5bc98b118279381d2"
 const BASE_URL = "https://api.openweathermap.org/data/2.5"
 
 /**
@@ -10,9 +10,11 @@ const BASE_URL = "https://api.openweathermap.org/data/2.5"
  *
  * @param {string} query City to get current weather for
  */
-const getCurrentWeather = async query => {
+const getCurrentWeather = async (query) => {
 	// get weather for query from OpenWeatherMap API
-	const response = await fetch(`${BASE_URL}/weather?q=${query}&units=metric&appid=${API_KEY}`)
+	const response = await fetch(
+		`${BASE_URL}/weather?q=${query}&units=metric&appid=${API_KEY}`
+	)
 
 	// convert response from JSON
 	const data = await response.json()
@@ -24,6 +26,4 @@ const getCurrentWeather = async query => {
 	return data
 }
 
-export {
-	getCurrentWeather,
-}
+export { getCurrentWeather }

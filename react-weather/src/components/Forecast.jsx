@@ -1,27 +1,31 @@
-import React from 'react'
-import forecastBanner from '../assets/images/forecast-banner.png'
+import React from "react"
+import forecastBanner from "../assets/images/forecast-banner.png"
 
-const Forecast = () => {
+const Forecast = ({ weatherData }) => {
 	return (
 		<div id="forecast">
 			<div className="card">
-
-				<img src={forecastBanner} className="card-img-top" alt="Daytime, nighttime, daytime, nighttime"/>
+				<img
+					src={forecastBanner}
+					className="card-img-top"
+					alt="Daytime, nighttime, daytime, nighttime"
+				/>
 
 				<div className="card-body">
 					<h5 className="card-title" id="location">
-						<span id="city">CITY</span>,
-						<span id="country">COUNTRY</span>
+						<span id="city">{weatherData.name}</span>,
+						<span id="country">{weatherData.sys.country}</span>
 					</h5>
 					<p className="temp">
-						<span id="temperature">TEMP</span>
+						<span id="temperature">{weatherData.main.temp}</span>
 						&deg;C
 					</p>
 					<p className="humidity">
-						<span id="humidity">HUMIDITY</span> % humidity
+						<span id="humidity">{weatherData.main.humidity}</span> %
+						humidity
 					</p>
 					<p className="wind">
-						<span id="windspeed">WIND_SPEED</span> m/s
+						<span id="windspeed">{weatherData.wind.speed}</span> m/s
 					</p>
 
 					{/*
@@ -36,7 +40,6 @@ const Forecast = () => {
 					</p>
 					*/}
 				</div>
-
 			</div>
 		</div>
 	)
