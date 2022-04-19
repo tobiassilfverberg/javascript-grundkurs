@@ -1,17 +1,11 @@
-const TodoListItem = ({ todo, onTitleClick, onDelete }) => {
-	return (
-		<li className={todo.completed ? 'done' : ''}>
-			<span
-				className="todo-title"
-				onClick={() => onTitleClick(todo)}
-			>
-				{todo.title}
-			</span>
+import { Link } from "react-router-dom"
 
-			<span
-				className="todo-delete"
-				onClick={() => onDelete(todo)}
-			>🗑</span>
+const TodoListItem = ({ todo }) => {
+	return (
+		<li className={todo.completed ? "done" : ""}>
+			<Link className="todo-title" to={`/todos/${todo.id}`}>
+				{todo.title}
+			</Link>
 		</li>
 	)
 }
