@@ -12,13 +12,11 @@ const TodosPage = () => {
 		setTodos(data)
 	}
 
-	/*
 	// Delete a todo in the api
 	const deleteTodo = async (todo) => {
 		await TodosAPI.deleteTodo(todo.id)
 		getTodos()
 	}
-	*/
 
 	// Get todos from api when component is first mounted
 	useEffect(() => {
@@ -32,15 +30,25 @@ const TodosPage = () => {
 			{todos.length > 0 && (
 				<ListGroup className="todolist">
 					{todos.map((todo) => (
-						<ListGroup.Item
-							action
-							as={Link}
-							className={todo.completed ? "done" : ""}
-							key={todo.id}
-							to={`/todos/${todo.id}`}
-						>
-							{todo.title}
-						</ListGroup.Item>
+						<>
+							<ListGroup.Item action key={todo.id}>
+								<Link
+									to={`/todos/${todo.id}`}
+									className={todo.completed ? "done" : "notDone"}
+								>
+									{" "}
+									{todo.title}{" "}
+								</Link>
+								<span
+									className="ms-auto"
+									onClick={() => {
+										deleteTodo(todo)
+									}}
+								>
+									🚮
+								</span>
+							</ListGroup.Item>
+						</>
 					))}
 				</ListGroup>
 			)}
