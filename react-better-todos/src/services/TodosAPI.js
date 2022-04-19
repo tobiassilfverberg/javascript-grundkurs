@@ -1,15 +1,23 @@
 /**
  * Service for communicating with the json-server backend
  */
-import axios from 'axios'
+import axios from "axios"
 
-const BASE_URL = 'http://localhost:3001'
+const BASE_URL = "http://localhost:3001"
 
 /**
  * Get all todos
  */
 const getTodos = async () => {
 	const res = await axios.get(`${BASE_URL}/todos`)
+	return res.data
+}
+
+/**
+ * Get a single todo
+ */
+const getTodo = async (id) => {
+	const res = await axios.get(`${BASE_URL}/todos/${id}`)
 	return res.data
 }
 
@@ -47,6 +55,7 @@ const deleteTodo = async (todo_id) => {
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
 	getTodos,
+	getTodo,
 	createTodo,
 	updateTodo,
 	deleteTodo,
