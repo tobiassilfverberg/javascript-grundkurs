@@ -3,8 +3,6 @@ import AddNewTodoForm from "../components/AddNewTodoForm"
 import AlertInfo from "../components/AlertInfo"
 import TodoList from "../components/TodoList"
 import TodosAPI from "../services/TodosAPI"
-import "bootstrap/dist/css/bootstrap.css"
-import "../App.css"
 
 const TodosPage = () => {
 	const [todos, setTodos] = useState([])
