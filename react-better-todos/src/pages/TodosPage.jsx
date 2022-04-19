@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import ListGroup from "react-bootstrap/ListGroup"
 import { Link } from "react-router-dom"
-import AddNewTodoForm from "../components/AddNewTodoForm"
 import TodosAPI from "../services/TodosAPI"
 
 const TodosPage = () => {
@@ -13,24 +12,10 @@ const TodosPage = () => {
 		setTodos(data)
 	}
 
-	// Create a new todo in the api
-	const createTodo = async (newTodo) => {
-		await TodosAPI.createTodo(newTodo)
-		getTodos()
-	}
-
 	/*
 	// Delete a todo in the api
 	const deleteTodo = async (todo) => {
 		await TodosAPI.deleteTodo(todo.id)
-		getTodos()
-	}
-
-	// Toggle the completed status of a todo in the api
-	const toggleTodo = async (todo) => {
-		await TodosAPI.updateTodo(todo.id, {
-			completed: !todo.completed
-		})
 		getTodos()
 	}
 	*/
@@ -43,10 +28,6 @@ const TodosPage = () => {
 	return (
 		<>
 			<h1>Todos</h1>
-
-			<div className="mb-3">
-				<AddNewTodoForm onAddNewTodo={createTodo} />
-			</div>
 
 			{todos.length > 0 && (
 				<ListGroup className="todolist">

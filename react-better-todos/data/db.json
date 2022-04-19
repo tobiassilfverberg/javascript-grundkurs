@@ -1,24 +1,54 @@
 {
-	"todos": [
-		{
-			"id": 1,
-			"title": "Make coffee",
-			"completed": true
-		},
-		{
-			"id": 2,
-			"title": "Drink coffee",
-			"completed": true
-		},
-		{
-			"id": 3,
-			"title": "Drink MOAR coffee",
-			"completed": false
-		},
-		{
-			"id": 4,
-			"title": "Drink ALL THE coffee",
-			"completed": false
-		}
-	]
+  "todos": [
+    {
+      "id": 1,
+      "title": "Make coffee",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "Drink coffee",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "title": "Drink MOAR coffee",
+      "completed": true
+    },
+    {
+      "id": 4,
+      "title": "Drink ALL THE coffee",
+      "completed": false
+    },
+    {
+      "title": "Yoyoyoyo",
+      "completed": true,
+      "id": 5
+    },
+    {
+      "title": "Tjena",
+      "completed": false,
+      "id": 6
+    },
+    {
+      "title": "Koka kaffe",
+      "completed": true,
+      "id": 7
+    },
+    {
+      "title": "Köpa redbull",
+      "completed": false,
+      "id": 8
+    },
+    {
+      "title": "Få bort att \"Todos\" länken är markerade inne i \"Create\"",
+      "completed": true,
+      "id": 9
+    },
+    {
+      "title": "Watch Despicable ME",
+      "completed": false,
+      "id": 10
+    }
+  ]
 }
