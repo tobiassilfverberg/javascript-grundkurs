@@ -1,14 +1,34 @@
 {
   "todos": [
     {
-      "title": "Dricka kaffe",
+      "title": "Dricka allt kaffe",
       "completed": false,
-      "id": 2
+      "id": 6
     },
     {
-      "title": "Dricka mer kaffe",
+      "title": "Koka kaffe",
       "completed": false,
-      "id": 3
+      "id": 7
+    },
+    {
+      "title": "Dricka kaffe",
+      "completed": false,
+      "id": 8
+    },
+    {
+      "title": "Hejsan",
+      "completed": false,
+      "id": 9
+    },
+    {
+      "title": "Hallå",
+      "completed": false,
+      "id": 10
+    },
+    {
+      "title": "Tjenare mannen",
+      "completed": true,
+      "id": 11
     }
   ]
 }

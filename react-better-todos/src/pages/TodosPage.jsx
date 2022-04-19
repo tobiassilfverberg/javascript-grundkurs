@@ -31,16 +31,21 @@ const TodosPage = () => {
 				<ListGroup className="todolist">
 					{todos.map((todo) => (
 						<>
-							<ListGroup.Item action key={todo.id}>
+							<ListGroup.Item
+								action
+								key={todo.id}
+								className="d-flex justify-content-between"
+							>
 								<Link
 									to={`/todos/${todo.id}`}
-									className={todo.completed ? "done" : "notDone"}
+									className={
+										todo.completed ? "done" : "notDone"
+									}
 								>
 									{" "}
 									{todo.title}{" "}
 								</Link>
 								<span
-									className="ms-auto"
 									onClick={() => {
 										deleteTodo(todo)
 									}}
