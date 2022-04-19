@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react'
-import AddNewTodoForm from './components/AddNewTodoForm'
-import AlertInfo from './components/AlertInfo'
-import TodoList from './components/TodoList'
-import TodosAPI from './services/TodosAPI'
-import './App.css'
+import { useEffect, useState } from "react"
+import AddNewTodoForm from "./components/AddNewTodoForm"
+import AlertInfo from "./components/AlertInfo"
+import TodoList from "./components/TodoList"
+import TodosAPI from "./services/TodosAPI"
+import "bootstrap/dist/css/bootstrap.css"
+import "./App.css"
 
 const App = () => {
 	const [todos, setTodos] = useState([])
@@ -31,7 +32,7 @@ const App = () => {
 	// Toggle the completed status of a todo in the api
 	const toggleTodo = async (todo) => {
 		await TodosAPI.updateTodo(todo.id, {
-			completed: !todo.completed
+			completed: !todo.completed,
 		})
 		getTodos()
 	}
@@ -45,8 +46,8 @@ const App = () => {
 	// and only AFTER the component has been rendered
 	useEffect(() => {
 		// Derive unfinishedTodos and finishedTodos from todos state
-		setUnfinishedTodos(todos.filter(todo => !todo.completed))
-		setFinishedTodos(todos.filter(todo => todo.completed))
+		setUnfinishedTodos(todos.filter((todo) => !todo.completed))
+		setFinishedTodos(todos.filter((todo) => todo.completed))
 	}, [todos])
 
 	// This will only be executed if `finishedTodos` OR `todos` have changed since last render,
@@ -60,9 +61,7 @@ const App = () => {
 			<h1>React Simple Todos</h1>
 
 			<div className="mb-3">
-				<AddNewTodoForm
-					onAddNewTodo={createTodo}
-				/>
+				<AddNewTodoForm onAddNewTodo={createTodo} />
 			</div>
 
 			{todos.length > 0 && (
@@ -77,8 +76,14 @@ const App = () => {
 					{unfinishedTodos.length === 0 && (
 						<AlertInfo>
 							<h2>Yeeehaaaaw!</h2>
-							<img src="https://c.tenor.com/cBcdBXtqL8UAAAAC/colin-mochrie-whos-awesome.gif" className="img-fluid" alt="You're awesome!"/>
-							<p>You got <strong>nothing</strong> to do.</p>
+							<img
+								src="https://c.tenor.com/cBcdBXtqL8UAAAAC/colin-mochrie-whos-awesome.gif"
+								className="img-fluid"
+								alt="You're awesome!"
+							/>
+							<p>
+								You got <strong>nothing</strong> to do.
+							</p>
 						</AlertInfo>
 					)}
 
@@ -93,7 +98,10 @@ const App = () => {
 						</>
 					)}
 
-					<p className="status">{finishedTodos.length} av {todos.length} todos avklarade.</p>
+					<p className="status">
+						{finishedTodos.length} av {todos.length} todos
+						avklarade.
+					</p>
 				</>
 			)}
 
@@ -108,4 +116,4 @@ const App = () => {
 	)
 }
 
-export default App;
+export default App
