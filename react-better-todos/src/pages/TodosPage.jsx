@@ -9,7 +9,9 @@ const TodosPage = () => {
 	// Get todos from api
 	const getTodos = async () => {
 		const data = await TodosAPI.getTodos()
-		const sortedTodos = data.sort((a, b) => a.title.localeCompare(b.title))
+		const sortedTodos = data
+			.sort((a, b) => a.title.localeCompare(b.title))
+			.sort((a, b) => a.completed - b.completed)
 		setTodos(sortedTodos)
 	}
 
