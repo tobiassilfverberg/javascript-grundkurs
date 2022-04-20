@@ -12,12 +12,6 @@ const TodosPage = () => {
 		setTodos(data)
 	}
 
-	// Delete a todo in the api
-	const deleteTodo = async (todo) => {
-		await TodosAPI.deleteTodo(todo.id)
-		getTodos()
-	}
-
 	// Get todos from api when component is first mounted
 	useEffect(() => {
 		getTodos()
@@ -42,13 +36,6 @@ const TodosPage = () => {
 								{" "}
 								{todo.title}{" "}
 							</Link>
-							<span
-								onClick={() => {
-									deleteTodo(todo)
-								}}
-							>
-								🚮
-							</span>
 						</ListGroup.Item>
 					))}
 				</ListGroup>

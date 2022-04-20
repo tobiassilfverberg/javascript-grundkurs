@@ -17,6 +17,13 @@ const EditTodoPage = () => {
 	// input reference
 	const newTitleRef = useRef()
 
+	// Delete a todo in the api
+	const handleDelete = async () => {
+		await TodosAPI.deleteTodo(id)
+
+		navigate("/todos")
+	}
+
 	const handleSubmit = (e) => {
 		// stop form from submitting
 		e.preventDefault()
@@ -55,7 +62,11 @@ const EditTodoPage = () => {
 				>
 					Save
 				</button>
-				<button type="delete" className="btn btn-danger">
+				<button
+					type="delete"
+					className="btn btn-danger"
+					onClick={handleDelete}
+				>
 					Delete
 				</button>
 			</div>
