@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import Button from "react-bootstrap/Button"
 import { useParams } from "react-router-dom"
 import TodosAPI from "../services/TodosAPI"
+import { Link } from "react-router-dom"
 
 const TodoPage = () => {
 	const [todo, setTodo] = useState()
@@ -30,7 +31,7 @@ const TodoPage = () => {
 
 	return (
 		<div>
-			<h3> {todo.title} </h3>
+			<h3 className="mt-2"> {todo.title} </h3>
 
 			<p>
 				<strong>Status:</strong>{" "}
@@ -41,7 +42,14 @@ const TodoPage = () => {
 				{" "}
 				Toggle{" "}
 			</Button>
-			<Button variant="warning"> Edit </Button>
+			<Button
+				variant="warning"
+				as={Link}
+				to="./EditTodoPage"
+				state={todo}
+			>
+				Edit
+			</Button>
 		</div>
 	)
 }

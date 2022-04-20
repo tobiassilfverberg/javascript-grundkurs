@@ -25,35 +25,31 @@ const TodosPage = () => {
 
 	return (
 		<>
-			<h1>Todos</h1>
+			<h1 className="mt-2">Todos</h1>
 
 			{todos.length > 0 && (
 				<ListGroup className="todolist">
 					{todos.map((todo) => (
-						<>
-							<ListGroup.Item
-								action
-								key={todo.id}
-								className="d-flex justify-content-between"
+						<ListGroup.Item
+							action
+							key={todo.id}
+							className="d-flex justify-content-between"
+						>
+							<Link
+								to={`/todos/${todo.id}`}
+								className={todo.completed ? "done" : "notDone"}
 							>
-								<Link
-									to={`/todos/${todo.id}`}
-									className={
-										todo.completed ? "done" : "notDone"
-									}
-								>
-									{" "}
-									{todo.title}{" "}
-								</Link>
-								<span
-									onClick={() => {
-										deleteTodo(todo)
-									}}
-								>
-									🚮
-								</span>
-							</ListGroup.Item>
-						</>
+								{" "}
+								{todo.title}{" "}
+							</Link>
+							<span
+								onClick={() => {
+									deleteTodo(todo)
+								}}
+							>
+								🚮
+							</span>
+						</ListGroup.Item>
 					))}
 				</ListGroup>
 			)}

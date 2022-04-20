@@ -13,7 +13,7 @@ const CreateTodo = () => {
 	}
 
 	return (
-		<div className="mb-3 mt-5">
+		<div className="mb-3 mt-3">
 			<AddNewTodoForm onAddNewTodo={createTodo} />
 		</div>
 	)
