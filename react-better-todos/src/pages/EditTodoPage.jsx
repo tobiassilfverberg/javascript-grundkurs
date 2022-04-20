@@ -46,12 +46,17 @@ const EditTodoPage = () => {
 					onChange={(e) => setNewTitle(e.target.value)}
 					value={newTitle}
 				/>
+			</div>
+			<div className="d-flex justify-content-between mt-2">
 				<button
 					type="submit"
 					className="btn btn-primary"
 					disabled={!newTitle.length}
 				>
-					Save changes
+					Save
+				</button>
+				<button type="delete" className="btn btn-danger">
+					Delete
 				</button>
 			</div>
 		</form>

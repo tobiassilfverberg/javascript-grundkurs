@@ -1,19 +1,24 @@
 {
   "todos": [
     {
-      "title": "Hejsan paycheck wohooo",
-      "completed": false,
-      "id": 9
-    },
-    {
-      "title": "Läget din pizzbakare",
-      "completed": false,
-      "id": 10
-    },
-    {
-      "title": "Tjenare mannen",
+      "title": "Koka kaffe",
       "completed": true,
-      "id": 11
+      "id": 12
+    },
+    {
+      "title": "Dricka kaffe",
+      "completed": true,
+      "id": 13
+    },
+    {
+      "title": "Dricka mer kaffe",
+      "completed": false,
+      "id": 14
+    },
+    {
+      "title": "Dricka allt kaffe",
+      "completed": false,
+      "id": 15
     }
   ]
 }
