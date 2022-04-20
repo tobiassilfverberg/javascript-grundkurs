@@ -9,7 +9,8 @@ const TodosPage = () => {
 	// Get todos from api
 	const getTodos = async () => {
 		const data = await TodosAPI.getTodos()
-		setTodos(data)
+		const sortedTodos = data.sort((a, b) => a.title.localeCompare(b.title))
+		setTodos(sortedTodos)
 	}
 
 	// Get todos from api when component is first mounted
