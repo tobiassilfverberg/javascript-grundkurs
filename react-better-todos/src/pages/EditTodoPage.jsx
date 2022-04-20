@@ -19,6 +19,10 @@ const EditTodoPage = () => {
 
 	// Delete a todo in the api
 	const handleDelete = async () => {
+		if (!window.confirm("Confirm to delete todo")) {
+			return
+		}
+
 		await TodosAPI.deleteTodo(id)
 
 		navigate("/todos")
