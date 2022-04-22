@@ -8,10 +8,11 @@ import { search as HackerNews_search } from "../services/HackerNewsAPI"
 const SearchHackerNews = () => {
 	const [searchInput, setSearchInput] = useState("")
 	const [searchResult, setSearchResult] = useState(null)
+	const [page, setPage] = useState(0)
 	const [loading, setLoading] = useState(false)
 	const searchInputRef = useRef()
 
-	const searchHackerNews = async (searchQuery, page = 0) => {
+	const searchHackerNews = async (searchQuery, page) => {
 		// set loading to true
 		setLoading(true)
 		setSearchResult(null)
@@ -32,8 +33,18 @@ const SearchHackerNews = () => {
 		}
 
 		// search HN
-		searchHackerNews(searchInput)
+		setPage(0)
+		searchHackerNews(searchInput, 0)
 	}
+
+	// react to changes in our page state, a.k.a. when user clicks page back or next
+	useEffect(() => {
+		if (!searchInput.length) {
+			return
+		}
+
+		searchHackerNews(searchInput, page)
+	}, [page])
 
 	return (
 		<>
@@ -90,13 +101,27 @@ const SearchHackerNews = () => {
 
 					<div className="d-flex justify-content-between align-items-center mt-4">
 						<div className="prev">
-							<Button variant="primary">
+							<Button
+								disabled={page === 0}
+								onClick={() =>
+									setPage((prevValue) => prevValue - 1)
+								}
+								variant="primary"
+							>
 								Previous Page
 							</Button>
 						</div>
-						<div className="page">{searchResult.page}</div>
+						<div className="page">
+							Page {page + 1} of {searchResult.nbPages}
+						</div>
 						<div className="next">
-							<Button variant="primary">
+							<Button
+								disabled={page + 1 >= searchResult.nbPages}
+								onClick={() =>
+									setPage((prevValue) => prevValue + 1)
+								}
+								variant="primary"
+							>
 								Next Page
 							</Button>
 						</div>
