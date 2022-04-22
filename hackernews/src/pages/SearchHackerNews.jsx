@@ -1,14 +1,30 @@
-import { useEffect, useState, useRef } from 'react'
-import Button from 'react-bootstrap/Button'
-import Form from 'react-bootstrap/Form'
-import ListGroup from 'react-bootstrap/ListGroup'
+import { useEffect, useState, useRef } from "react"
+import { Link } from "react-router-dom"
+import Button from "react-bootstrap/Button"
+import Form from "react-bootstrap/Form"
+import ListGroup from "react-bootstrap/ListGroup"
+import { search as HackerNews_search } from "../services/HackerNewsAPI"
 
 const SearchHackerNews = () => {
-	const [searchInput, setSearchInput] = useState('')
-	const [loading, setLoading] = useState(true)
+	const [searchInput, setSearchInput] = useState("")
+	const [searchResult, setSearchResult] = useState(null)
+	const [loading, setLoading] = useState(false)
 	const searchInputRef = useRef()
 
-	const handleSubmit = async e => {
+	const searchHackerNews = async (searchQuery, page = 0) => {
+		// set loading to true
+		setLoading(true)
+		setSearchResult(null)
+
+		// execute search
+		const data = await HackerNews_search(searchQuery, page)
+		setSearchResult(data)
+
+		// set loading to false
+		setLoading(false)
+	}
+
+	const handleSubmit = async (e) => {
 		e.preventDefault()
 
 		if (!searchInput.length) {
@@ -16,6 +32,7 @@ const SearchHackerNews = () => {
 		}
 
 		// search HN
+		searchHackerNews(searchInput)
 	}
 
 	return (
@@ -26,7 +43,7 @@ const SearchHackerNews = () => {
 				<Form.Group className="mb-3" controlId="newTitle">
 					<Form.Label>Search Query</Form.Label>
 					<Form.Control
-						onChange={e => setSearchInput(e.target.value)}
+						onChange={(e) => setSearchInput(e.target.value)}
 						placeholder="Enter your search query"
 						ref={searchInputRef}
 						required
@@ -36,40 +53,52 @@ const SearchHackerNews = () => {
 				</Form.Group>
 
 				<div className="d-flex justify-content-between">
-					<Button variant="success" type="submit" disabled={!searchInput.length}>Search</Button>
+					<Button
+						variant="success"
+						type="submit"
+						disabled={!searchInput.length}
+					>
+						Search
+					</Button>
 				</div>
 			</Form>
 
-			{loading && (<div className="mt-4">Loading...</div>)}
+			{loading && <div className="mt-4">Loading...</div>}
 
-			{true && (
+			{searchResult && (
 				<div className="search-result mt-4">
-					<p>Showing HITS search results for QUERY...</p>
+					<p>
+						Showing {searchResult.nbHits} search results for{" "}
+						{searchResult.query}...
+					</p>
 
 					<ListGroup>
-						{[{}].map(hit => (
+						{searchResult.hits.map((hit) => (
 							<ListGroup.Item
 								action
-								href={''}
-								key={''}
+								href={hit.url}
+								target="_blank"
+								key={hit.objectID}
 							>
-								<h3>TITLE</h3>
-								<p className="text-muted small mb-0">Posted at CREATED_AT by AUTHOR</p>
+								<h3>{hit.title}</h3>
+								<p className="text-muted small mb-0">
+									Posted at {hit.created_at} by {hit.author}
+								</p>
 							</ListGroup.Item>
 						))}
 					</ListGroup>
 
 					<div className="d-flex justify-content-between align-items-center mt-4">
 						<div className="prev">
-							<Button
-								variant="primary"
-							>Previous Page</Button>
+							<Button variant="primary">
+								Previous Page
+							</Button>
 						</div>
-						<div className="page">PAGE</div>
+						<div className="page">{searchResult.page}</div>
 						<div className="next">
-							<Button
-								variant="primary"
-							>Next Page</Button>
+							<Button variant="primary">
+								Next Page
+							</Button>
 						</div>
 					</div>
 				</div>
