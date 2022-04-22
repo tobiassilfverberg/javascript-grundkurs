@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "react"
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 import ListGroup from "react-bootstrap/ListGroup"
+import { useSearchParams } from "react-router-dom"
 import { search as HackerNews_search } from "../services/HackerNewsAPI"
 
 const SearchHackerNews = () => {
@@ -9,8 +10,10 @@ const SearchHackerNews = () => {
 	const [searchResult, setSearchResult] = useState(null)
 	const [page, setPage] = useState(0)
 	const [loading, setLoading] = useState(false)
+	const [searchParams, setSearchParams] = useSearchParams()
 	const searchInputRef = useRef()
-	const queryRef = useRef()
+
+	const query = searchParams.get("query")
 
 	const searchHackerNews = async (searchQuery, page) => {
 		// set loading to true
@@ -32,22 +35,22 @@ const SearchHackerNews = () => {
 			return
 		}
 
-		// save query to query ref
-		queryRef.current = searchInput
-
 		// search HN
 		setPage(0)
-		searchHackerNews(searchInput, 0)
+		setSearchParams({ query: searchInput })
 	}
 
 	// react to changes in our page state, a.k.a. when user clicks page back or next
 	useEffect(() => {
-		if (!queryRef.current) {
+		if (!query) {
+			setSearchInput("")
+			setSearchResult(null)
 			return
 		}
 
-		searchHackerNews(queryRef.current, page)
-	}, [page])
+		setSearchInput(query)
+		searchHackerNews(query, page)
+	}, [query, page])
 
 	return (
 		<>
