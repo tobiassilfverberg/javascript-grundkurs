@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react"
-import { Link } from "react-router-dom"
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 import ListGroup from "react-bootstrap/ListGroup"
@@ -11,6 +10,7 @@ const SearchHackerNews = () => {
 	const [page, setPage] = useState(0)
 	const [loading, setLoading] = useState(false)
 	const searchInputRef = useRef()
+	const queryRef = useRef()
 
 	const searchHackerNews = async (searchQuery, page) => {
 		// set loading to true
@@ -32,6 +32,9 @@ const SearchHackerNews = () => {
 			return
 		}
 
+		// save query to query ref
+		queryRef.current = searchInput
+
 		// search HN
 		setPage(0)
 		searchHackerNews(searchInput, 0)
@@ -39,11 +42,11 @@ const SearchHackerNews = () => {
 
 	// react to changes in our page state, a.k.a. when user clicks page back or next
 	useEffect(() => {
-		if (!searchInput.length) {
+		if (!queryRef.current) {
 			return
 		}
 
-		searchHackerNews(searchInput, page)
+		searchHackerNews(queryRef.current, page)
 	}, [page])
 
 	return (
