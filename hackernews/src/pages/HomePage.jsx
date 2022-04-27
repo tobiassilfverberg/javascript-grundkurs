@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 import { ThemeContext } from "../contexts/ThemeContextProvider"
 
 const HomePage = () => {
-	const { theme, toggleTheme } = useContext(ThemeContext)
+	const { isDarkTheme, theme, toggleTheme } = useContext(ThemeContext)
 
 	return (
 		<>
@@ -17,7 +17,9 @@ const HomePage = () => {
 			<p>Your theme is: {theme}</p>
 
 			<Button onClick={toggleTheme} variant="success">
-				Change theme
+				{isDarkTheme()
+					? "Too dark, light plz!"
+					: "Way too bright, can't see"}
 			</Button>
 		</>
 	)
