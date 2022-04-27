@@ -4,11 +4,10 @@ import Navbar from "react-bootstrap/Navbar"
 import Nav from "react-bootstrap/Nav"
 import { Link, NavLink } from "react-router-dom"
 
-import { ThemeContext } from "../contexts/ThemeContextProvider"
-import { useContext } from "react"
+import { useThemeContext } from "../contexts/ThemeContextProvider"
 
 const Navigation = () => {
-	const { isDarkTheme, toggleTheme } = useContext(ThemeContext)
+	const { isDarkTheme, toggleTheme } = useThemeContext()
 
 	return (
 		<Navbar
