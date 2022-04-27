@@ -1,16 +1,19 @@
-import Container from 'react-bootstrap/Container'
-import { Routes, Route } from 'react-router-dom'
-import Navigation from './components/Navigation'
-import HomePage from './pages/HomePage'
-import SearchHackerNews from './pages/SearchHackerNews'
-import NotFound from './pages/NotFound'
-import 'bootstrap/dist/css/bootstrap.css'
-import './App.css'
+import { useContext } from "react"
+import Container from "react-bootstrap/Container"
+import { Routes, Route } from "react-router-dom"
+import Navigation from "./components/Navigation"
+import { ThemeContext } from "./contexts/ThemeContextProvider"
+import HomePage from "./pages/HomePage"
+import SearchHackerNews from "./pages/SearchHackerNews"
+import NotFound from "./pages/NotFound"
+import "bootstrap/dist/css/bootstrap.css"
+import "./App.css"
 
 const App = () => {
+	const { theme } = useContext(ThemeContext)
 
 	return (
-		<div id="App">
+		<div id="App" className={theme === "dark" ? "bg-dark text-light" : ""}>
 			<Navigation />
 
 			<Container className="py-3">
