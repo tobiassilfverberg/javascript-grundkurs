@@ -8,7 +8,7 @@ import { ThemeContext } from "../contexts/ThemeContextProvider"
 import { useContext } from "react"
 
 const Navigation = () => {
-	const { isDarkTheme, theme, toggleTheme } = useContext(ThemeContext)
+	const { isDarkTheme, toggleTheme } = useContext(ThemeContext)
 
 	return (
 		<Navbar
@@ -30,7 +30,7 @@ const Navigation = () => {
 						</Nav.Link>
 						<Button
 							onClick={toggleTheme}
-							variant="secondary"
+							variant="outline-secondary"
 						>
 							{isDarkTheme() ? "Lightmode" : "Darkmode"}
 						</Button>
