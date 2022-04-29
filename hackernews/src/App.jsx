@@ -7,6 +7,7 @@ import SearchHackerNews from "./pages/SearchHackerNews"
 import NotFound from "./pages/NotFound"
 import "bootstrap/dist/css/bootstrap.css"
 import "./App.css"
+import FetchPage from "./pages/FetchPage"
 
 const App = () => {
 	const { getStyle } = useThemeContext()
@@ -19,6 +20,7 @@ const App = () => {
 				<Routes>
 					<Route path="/" element={<HomePage />} />
 					<Route path="/search" element={<SearchHackerNews />} />
+					<Route path="/fetch" element={<FetchPage />} />
 					<Route path="*" element={<NotFound />} />
 				</Routes>
 			</Container>
