@@ -13,10 +13,12 @@ const useFetch = (initialUrl = null) => {
 			const res = await axios.get(url)
 			await new Promise((r) => setTimeout(r, 1000))
 			setData(res.data)
+			setError(null)
 		} catch (err) {
 			setError(err)
+		} finally {
+			setLoading(false)
 		}
-		setLoading(false)
 	}, [url])
 
 	useEffect(() => {

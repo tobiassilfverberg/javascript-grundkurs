@@ -13,9 +13,7 @@ const FetchPage = () => {
 
 			{error && <p>Error: {error.message}</p>}
 
-			{!loading && (
-				<>{data && <p className="display-1">{data.value}</p>}</>
-			)}
+			{data && !loading && <p className="display-1">{data.value}</p>}
 
 			<Button disabled={loading} onClick={fetchData}>
 				Get new joke
