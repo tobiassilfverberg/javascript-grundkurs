@@ -1,0 +1,23 @@
+/**
+ * Generic styles
+ */
+
+@import "typography";
+
+body {
+	background-color: #efefef;
+	color: #333;
+	line-height: 1.5;
+}
+
+#app {
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.hide {
+	display: none;
+}
