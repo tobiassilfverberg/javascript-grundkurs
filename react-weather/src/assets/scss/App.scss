@@ -1,4 +1,11 @@
-@import "variables"; 
+@import "variables";
+
+@import "bootstrap/scss/bootstrap";
+
+* {
+	color: $teal;
+}
+
 @import "forecast";
 @import "search";
 @import "generic";
